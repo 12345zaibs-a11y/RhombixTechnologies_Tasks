@@ -16,7 +16,12 @@ public class Player : MonoBehaviour
     }
     void Update()
     {
-        
+            //Jump
+        if (Input.GetKeyDown(KeyCode.W) && isGrounded)
+       {
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0); // reset Y
+        rb.AddForce(Vector2.up * 10f, ForceMode2D.Impulse);
+       } 
     }
     // FixedUpdate is called every fixed framerate frame and is used for physics calculations
     void FixedUpdate()
@@ -24,12 +29,7 @@ public class Player : MonoBehaviour
         //movements Left and Right
         float xmovement=Input.GetAxis("Horizontal"); 
        rb.linearVelocity = new Vector2(xmovement * speed, rb.linearVelocity.y);
-
-        //jump with space or w key
-        if(Input.GetKeyDown(KeyCode.W)||Input.GetKeyDown(KeyCode.Space) && isGrounded)
-        {
-            rb.AddForce(Vector2.up * 5f, ForceMode2D.Impulse);
-        }
+       
     }
     // check if player is on the ground or not 
     // both will work with the different results
